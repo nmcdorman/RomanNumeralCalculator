@@ -11,18 +11,87 @@ namespace RomanNumeralCalculator
     {
         public string Add(string first, string second)
         {
+
             var firstNumerals = first.ToCharArray();
             var secondNumerals = second.ToCharArray();            
             var firstNumbers = new List<int>();
             var secondNumbers = new List<int>();
-
+                        
             foreach (var numeral in firstNumerals)
             {                
-                firstNumbers.Add(ConvertToNumber(numeral.ToString()));
+                firstNumbers.Add(ConvertToNumber(numeral.ToString()));                
             }
             foreach (var numeral in secondNumerals)
             {
                 secondNumbers.Add(ConvertToNumber(numeral.ToString()));
+            }
+
+            for (var i = 0; i < firstNumbers.Count - 1; i++)
+            {
+                if (firstNumbers[i] == 1 && firstNumbers[i + 1] == 5)
+                {
+                    firstNumbers[i] = 0;
+                    firstNumbers[i + 1] = 4;
+                }
+                if (firstNumbers[i] == 1 && firstNumbers[i + 1] == 10)
+                {
+                    firstNumbers[i] = 0;
+                    firstNumbers[i + 1] = 9;
+                }
+                if (firstNumbers[i] == 1 && firstNumbers[i + 1] == 50)
+                {
+                    firstNumbers[i] = 0;
+                    firstNumbers[i + 1] = 49;
+                }
+                if (firstNumbers[i] == 1 && firstNumbers[i + 1] == 100)
+                {
+                    firstNumbers[i] = 0;
+                    firstNumbers[i + 1] = 99;
+                }
+                if (firstNumbers[i] == 1 && firstNumbers[i + 1] == 500)
+                {
+                    firstNumbers[i] = 0;
+                    firstNumbers[i + 1] = 499;
+                }
+                if (firstNumbers[i] == 1 && firstNumbers[i + 1] == 1000)
+                {
+                    firstNumbers[i] = 0;
+                    firstNumbers[i + 1] = 999;
+                }
+            }
+            
+            for (var i = 0; i < secondNumbers.Count - 1; i++)
+            {
+                if (secondNumbers[i] == 1 && secondNumbers[i + 1] == 5)
+                {
+                    secondNumbers[i] = 0;
+                    secondNumbers[i + 1] = 4;
+                }
+                if (secondNumbers[i] == 1 && secondNumbers[i + 1] == 10)
+                {
+                    secondNumbers[i] = 0;
+                    secondNumbers[i + 1] = 9;
+                }
+                if (secondNumbers[i] == 1 && secondNumbers[i + 1] == 50)
+                {
+                    secondNumbers[i] = 0;
+                    secondNumbers[i + 1] = 49;
+                }
+                if (secondNumbers[i] == 1 && secondNumbers[i + 1] == 100)
+                {
+                    secondNumbers[i] = 0;
+                    secondNumbers[i + 1] = 99;
+                }
+                if (secondNumbers[i] == 1 && secondNumbers[i + 1] == 500)
+                {
+                    secondNumbers[i] = 0;
+                    secondNumbers[i + 1] = 499;
+                }
+                if (secondNumbers[i] == 1 && secondNumbers[i + 1] == 1000)
+                {
+                    secondNumbers[i] = 0;
+                    secondNumbers[i + 1] = 999;
+                }
             }
 
             return ConvertToNumeral(firstNumbers.Sum() + secondNumbers.Sum());
@@ -59,7 +128,7 @@ namespace RomanNumeralCalculator
             var remainderX = 0;
             var V = number / 5;
             var remainderV = 0;
-            var I = number / 1;
+            var I = (number / 1);
             var remainderI = 0;
 
             while (remainder > 0)
@@ -69,7 +138,10 @@ namespace RomanNumeralCalculator
                     M = number / 1000;
                     remainderM = number % 1000;
                     for (var i = M; M > 0; M--)
+                    {
                         numeral = numeral + "M";
+                        remainder -= 1000;
+                    }
                 }
 
                 if (D > 0)
@@ -77,7 +149,10 @@ namespace RomanNumeralCalculator
                     D = number / 500;
                     remainderD = number % 500;
                     for (var i = D; D > 0; D--)
-                        numeral = numeral + "D";                    
+                    {
+                        numeral = numeral + "D";
+                        remainder -= 500;
+                    }
                 }
 
                 if (C > 0)
@@ -85,66 +160,53 @@ namespace RomanNumeralCalculator
                     C = number / 100;
                     remainderC = number % 100;
                     for (var i = C; C > 0; C--)
+                    {
                         numeral = numeral + "C";
+                        remainder -= 100;
+                    }
                 }
                 if (L > 0)
                 {
                     L = number / 50;
                     remainderL = number % 50;
                     for (var i = L; L > 0; L--)
+                    {
                         numeral = numeral + "L";
+                        remainder -= 50;
+                    }
                 }
                 if (X > 0)
                 {
                     X = number / 10;
                     remainderX = number % 10;
                     for (var i = X; X > 0; X--)
+                    {
                         numeral = numeral + "X";
+                        remainder -= 10;
+                    }
                 }
                 if (V > 0)
                 {                    
                     V = number / 5;
                     remainderV = number % 5;                    
                     for (var i = V; V > 0; V--)
-                        numeral = numeral + "V";                        
+                    {
+                        numeral = numeral + "V";
+                        remainder -= 5;
+                    }
                 }
                 if (I > 0)
                 {                    
                     I = number / 1;
                     remainderI = number % I;
-                    for (var i = I; I > 0; I--)
+                    for (var i = remainder; i > 0; i--)
+                    {
                         numeral = numeral + "I";
+                        remainder -= 1;
+                    }
                     if (numeral.EndsWith("IIII"))
                         numeral = numeral.Replace("IIII", "IV");
-                }
-
-                remainder = remainderI + remainderC + remainderX + remainderL + remainderC + remainderD + remainderM;
-                //switch (number)
-                //{
-                //    case var n when n >= 1000:
-                //        var multiplesOfThousand = number / 1000;
-                //        remainderM = number % 1000;
-                //        return "M";
-                //    case var n when n >= 500:
-                //        var multiplesOfFiveHundred = number / 500;
-                //            return "D";
-                //    case var n when n >= 100:
-                //        var multiplesOfOneHundred = number / 100;
-                //        return "C";
-                //    case var n when n >= 50:
-                //        var multiplesOfFifty = number / 50;
-                //        return "L";
-                //    case var n when n >= 10:
-                //        var multiplesOfTen = number / 10;
-                //        return "X";                    
-                //    case var n when n >= 5:
-                //        var multiplesOfFive = number / 5;
-                //        return "V";
-                //    case var n when n >= 1:
-                //        var multiplesOfOne = number / 1;
-                //        return "I";
-                //    default: return " ";
-                //}
+                }                                
             }
             return numeral;
         }    

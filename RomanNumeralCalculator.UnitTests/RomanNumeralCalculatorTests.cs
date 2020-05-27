@@ -51,5 +51,20 @@ namespace RomanNumeralCalculator.UnitTests
             Assert.IsTrue(result == "VI");
             Assert.IsTrue(result1 == "VI");
         }
+
+        [TestMethod]
+        public void Add_IV_and_V__Returns_IX()
+        {
+            // Arrange
+            var calc = new NumeralCalculator();
+
+            // Act
+            var result = calc.Add("IV", "V");
+            var result1 = calc.Add("V", "IV");
+
+            // Assert
+            Assert.IsTrue(result == "IX");
+            Assert.IsTrue(result1 == "IX");
+        }
     }
 }
