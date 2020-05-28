@@ -56,19 +56,10 @@ namespace RomanNumeralCalculator
             for (var i = V; V > 0; V--) numeral += "V";
             for (var i = I; I > 0; I--) numeral += "I";
 
-            var remainderD = M % 1000;
-            var remainderC = D % 500;
-            var remainderL = C % 100;
-            var remainderX = L % 50;
-            var remainderV = X % 10;
-            var remainderI = V % 5;
-
-            remainder = remainderD + remainderC + remainderL
-                            + remainderX + remainderV + remainderI;
-
             numeral = numeral.Replace("IIII", "IV");
             numeral = numeral.Replace("XXXX", "XL");
             numeral = numeral.Replace("CCCC", "CD");
+            numeral = numeral.Replace("LXL", "XC");
 
             return numeral;
         }
