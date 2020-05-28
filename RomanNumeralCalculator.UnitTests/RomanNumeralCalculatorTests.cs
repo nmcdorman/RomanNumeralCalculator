@@ -21,7 +21,7 @@ namespace RomanNumeralCalculator.UnitTests
             Assert.IsTrue(result == "III");
             Assert.IsTrue(result1 == "III");
         }
-        
+
         [TestMethod]
         public void Add_I_and_III_Returns_IV()
         {
@@ -36,7 +36,7 @@ namespace RomanNumeralCalculator.UnitTests
             Assert.IsTrue(result == "IV");
             Assert.IsTrue(result1 == "IV");
         }
-        
+
         [TestMethod]
         public void Add_IV_and_II__Returns_VI()
         {
@@ -53,18 +53,17 @@ namespace RomanNumeralCalculator.UnitTests
         }
 
         [TestMethod]
-        public void Add_IV_and_V__Returns_IX()
+        public void Add_MCDXC_and_X__Returns_MD()
         {
             // Arrange
             var calc = new NumeralCalculator();
 
             // Act
-            var result = calc.Add("IV", "V");
-            var result1 = calc.Add("V", "IV");
+            var result = calc.Add("MCDXC", "X");
 
             // Assert
-            Assert.IsTrue(result == "IX");
-            Assert.IsTrue(result1 == "IX");
+            Assert.IsTrue(result == "MD");
+            
         }
     }
 }
