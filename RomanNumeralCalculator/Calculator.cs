@@ -72,20 +72,14 @@ namespace RomanNumeralCalculator
 
             if (numerals.ContainsValue(numeral))
                 number = numerals.FirstOrDefault(n => n.Value == numeral).Key;
-            else
-            {
+            else            
                 if (numeral.Length == 1)
                     number = GetNumber(numeralArray[0].ToString());
-                else
-                {
-                    for (var i = numeral.Length - 1; i >= 0; i--)
-                    {
-                        if (i == 0)
-                        {
-                            number += GetNumber(numeralArray[i].ToString());
-                        }
-                        else
-                        {
+                else                
+                    for (var i = numeral.Length - 1; i >= 0; i--)                    
+                        if (i == 0)                        
+                            number += GetNumber(numeralArray[i].ToString());                        
+                        else                        
                             if ((numeralArray[i].ToString() == "M" && numeralArray[i - 1].ToString() == "C")
                                 || (numeralArray[i].ToString() == "D" && numeralArray[i - 1].ToString() == "C")
                                 || (numeralArray[i].ToString() == "C" && numeralArray[i - 1].ToString() == "X")
@@ -96,12 +90,7 @@ namespace RomanNumeralCalculator
                                             - GetNumber(numeralArray[i - 1].ToString()))
                                             - GetNumber(numeralArray[i - 1].ToString());
                             else
-                                number += GetNumber(numeralArray[i].ToString());
-
-                        }
-                    }
-                }
-            }
+                                number += GetNumber(numeralArray[i].ToString());            
             return number;
         }
     }
